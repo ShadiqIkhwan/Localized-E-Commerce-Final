@@ -1,0 +1,94 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.master.cs" Inherits="Localized_E_commerce.View.main" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Localized</title>
+    <link href="main.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <nav class="navbar">
+      <div class="navbar-section">
+          <asp:HyperLink runat="server" Text="LOCALIZED" NavigateUrl="~/View/home.aspx" CssClass="logo" />
+        <div class="search">
+          <img
+            src="../Assets/magnifying-glass-backup-svgrepo-com 1.svg"
+            alt=""
+            srcset=""
+          />
+          <input type="text" placeholder="Cari barang..." />
+        </div>
+
+          <div class="user">
+            <asp:Image CssClass="image" ID="Img_Not_Login" runat="server" ImageUrl="~/Assets/user_vector.svg" />
+            <asp:HyperLink ID="HL_Not_Login" runat="server" CssClass="text" NavigateUrl="~/View/login.aspx">Masuk / Daftar</asp:HyperLink>
+            
+            <asp:Button CssClass="profile" ID="ButtonProfile" runat="server" UseSubmitBehavior="false" OnClientClick="return false;"/>
+            <asp:Menu runat="server" ID="MenuUser" CssClass="menu" OnMenuItemClick="MenuUser_MenuItemClick">
+                <Items>
+                    <asp:MenuItem Text="Profile" Value="Profile" />
+                    <asp:MenuItem Text="Cart" Value="Cart"/>
+                    <asp:MenuItem Text="Logout" Value="Logout"/>
+                    
+                </Items>
+                <StaticMenuItemStyle CssClass="menuItem" />
+                <StaticHoverStyle BackColor="#a8b8d0" />
+            </asp:Menu>
+          </div>
+      </div>
+    </nav>
+    
+    <main>
+        <asp:ContentPlaceHolder ID="Content" runat="server"></asp:ContentPlaceHolder>
+    </main>
+
+    <footer>
+      <div class="container">
+          <div class="column">
+              <div class="title">Localized</div>
+              <asp:HyperLink NavigateUrl="~/View/about.aspx" Text="Tentang Kami" runat="server" CssClass="footer-item" />
+              <div class="footer-item">Blog</div>
+              <div class="footer-item">Karir</div>
+            </div>
+            <div class="column">
+              <div class="title">Layanan Pelanggan</div>
+              <div class="footer-item">Pusat Bantuan</div>
+              <div class="footer-item">Syarat dan Ketentuan</div>
+              <div class="footer-item">Kebijakan Privasi</div>
+            </div>
+            <div class="column">
+              <div class="title">Localized</div>
+              <div class="sosial-media">
+                <a href="">
+                  <img src="../Assets/facebook.svg" alt="" />
+                </a>
+                <a href="">
+                  <img src="../Assets/linkedin.svg" alt="" />
+                </a>
+                <a href="">
+                  <img src="../Assets/youtube.svg" alt="" />
+                </a>
+                <a href="">
+                  <img src="../Assets/instagram.svg" alt="" />
+                </a>
+              </div>
+            </div>
+      </div>
+    </footer>
+
+        <script>
+            const buttonProfile = document.querySelector('[id*="ButtonProfile"]')
+            const menu = document.querySelector('[id*="MenuUser"]')
+            buttonProfile.addEventListener("click", function () {
+                
+                menu.classList.toggle("active")
+            })
+        </script>
+
+    </form>
+</body>
+</html>

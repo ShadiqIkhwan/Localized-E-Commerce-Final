@@ -1,0 +1,120 @@
+﻿body {
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 0 4%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.navbar-section {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.navbar .navbar-section .logo {
+    font-size: 36px;
+    color: #E23E57;
+    text-transform: uppercase;
+}
+
+.container {
+    margin-top: 110px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+}
+
+    .container .form-container {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        gap: 16px;
+        height: fit-content;
+    }
+
+        .container .form-container .welcome {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+
+        .container .form-container .text-box {
+            padding: 12px 16px;
+            border-radius: 20px;
+            outline: none;
+            border: 1px solid #828282;
+        }
+
+        .container .form-container .btn-login {
+            background-color: #522546;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 20px;
+            width: 100% !important;
+            cursor: pointer;
+            outline: none;
+            border: none;
+        }
+
+            .container .form-container .btn-login:hover {
+                background-color: #522546;
+            }
+
+        .container .form-container .text-status {
+            font-size: 12px;
+            color: red;
+        }
+        footer {
+            margin-top: 50px;
+            padding: 0 6%;
+            padding-bottom: 50px;
+            background-color: white;
+        }
+
+    footer .footer-container {
+        margin-top: 100px !important;
+        display: flex;
+        gap: 100px;
+    }
+
+        footer .footer-container .column {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+            footer .footer-container .column .title {
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            footer .footer-container .column .footer-item {
+                font-size: 18px;
+            }
+
+            footer .footer-container .column .sosial-media {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+                footer .footer-container .column .sosial-media a {
+                    padding: 8px;
+                }

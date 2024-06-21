@@ -1,0 +1,61 @@
+﻿.address{
+    margin-top: 50px;
+    padding: 0 6%;
+}
+
+.list-address{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.address-item {
+    border-radius: 16px;
+    border: 1px solid #88304E;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+}
+
+.address-detail{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.address-detail .title{
+    font-size: 20px;
+    font-weight:bold;
+}
+
+.button-edit {
+    border: none;
+    outline: none;
+    background: none;
+    color: #E23E57;
+    cursor: pointer;
+}
+
+.full-address {
+    font-size: 16px;
+    font-weight: 600;
+    color: #808080;
+}
+
+.type-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #808080
+}
+
+.btn-add {
+    border-radius: 8px;
+    border: 1px solid #88304E;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: white;
+    cursor: pointer;
+}

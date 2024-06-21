@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LocalizedDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_ToCategory" FromRole="Categories" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="productId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_product_image" FromRole="Image" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Int32" Nullable="false" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="mainImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Products_ToCategory" FromRole="Products" ToRole="Categories" />
+    <NavigationProperty Name="Images" Relationship="Self.FK_product_image" FromRole="Products" ToRole="Image" />
+    <NavigationProperty Name="Sizes" Relationship="Self.FK_product_size" FromRole="Products" ToRole="Size" />
+    <NavigationProperty Name="Carts" Relationship="LocalizedDatabaseModel.FK_product" FromRole="Product" ToRole="Cart" />
+    <NavigationProperty Name="TransactionDetails" Relationship="LocalizedDatabaseModel.FK_transaction_product" FromRole="Product" ToRole="TransactionDetail" />
+  </EntityType>
+  <EntityType Name="Size">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="size1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="productId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_product_size" FromRole="Size" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Carts" Relationship="LocalizedDatabaseModel.FK_user" FromRole="User" ToRole="Cart" />
+    <NavigationProperty Name="Transactions" Relationship="LocalizedDatabaseModel.FK_transaction_user" FromRole="User" ToRole="Transaction" />
+    <NavigationProperty Name="Addresses" Relationship="LocalizedDatabaseModel.FK_address_user" FromRole="User" ToRole="Address" />
+  </EntityType>
+  <Association Name="FK_Products_ToCategory">
+    <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_image">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_size">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="Size" Type="Self.Size" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Size">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LocalizedDatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Images" EntityType="Self.Image" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Sizes" EntityType="Self.Size" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Products_ToCategory" Association="Self.FK_Products_ToCategory">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_image" Association="Self.FK_product_image">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_size" Association="Self.FK_product_size">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Size" EntitySet="Sizes" />
+    </AssociationSet>
+    <EntitySet Name="Carts" EntityType="LocalizedDatabaseModel.Cart" />
+    <AssociationSet Name="FK_product" Association="LocalizedDatabaseModel.FK_product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user" Association="LocalizedDatabaseModel.FK_user">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <EntitySet Name="Transactions" EntityType="LocalizedDatabaseModel.Transaction" />
+    <EntitySet Name="TransactionDetails" EntityType="LocalizedDatabaseModel.TransactionDetail" />
+    <AssociationSet Name="FK_transaction_product" Association="LocalizedDatabaseModel.FK_transaction_product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="TransactionDetail" EntitySet="TransactionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_transaction_detail" Association="LocalizedDatabaseModel.FK_transaction_detail">
+      <End Role="Transaction" EntitySet="Transactions" />
+      <End Role="TransactionDetail" EntitySet="TransactionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_transaction_user" Association="LocalizedDatabaseModel.FK_transaction_user">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <EntitySet Name="Addresses" EntityType="LocalizedDatabaseModel.Address" />
+    <AssociationSet Name="FK_address_user" Association="LocalizedDatabaseModel.FK_address_user">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_transaction_address" Association="LocalizedDatabaseModel.FK_transaction_address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="TransactionDetail" EntitySet="TransactionDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="productId" Type="Int32" Nullable="false" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="LocalizedDatabaseModel.FK_product" FromRole="Cart" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="LocalizedDatabaseModel.FK_user" FromRole="Cart" ToRole="User" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="size" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_product">
+    <End Type="LocalizedDatabaseModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="LocalizedDatabaseModel.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user">
+    <End Type="LocalizedDatabaseModel.User" Role="User" Multiplicity="1" />
+    <End Type="LocalizedDatabaseModel.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TransactionDetails" Relationship="LocalizedDatabaseModel.FK_transaction_detail" FromRole="Transaction" ToRole="TransactionDetail" />
+    <NavigationProperty Name="User" Relationship="LocalizedDatabaseModel.FK_transaction_user" FromRole="Transaction" ToRole="User" />
+  </EntityType>
+  <EntityType Name="TransactionDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productId" Type="Int32" Nullable="false" />
+    <Property Name="transactionId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="LocalizedDatabaseModel.FK_transaction_product" FromRole="TransactionDetail" ToRole="Product" />
+    <NavigationProperty Name="Transaction" Relationship="LocalizedDatabaseModel.FK_transaction_detail" FromRole="TransactionDetail" ToRole="Transaction" />
+    <Property Name="size" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="addressId" Type="Int32" />
+    <NavigationProperty Name="Address" Relationship="LocalizedDatabaseModel.FK_transaction_address" FromRole="TransactionDetail" ToRole="Address" />
+  </EntityType>
+  <Association Name="FK_transaction_product">
+    <End Type="LocalizedDatabaseModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="LocalizedDatabaseModel.TransactionDetail" Role="TransactionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionDetail">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_transaction_detail">
+    <End Type="LocalizedDatabaseModel.Transaction" Role="Transaction" Multiplicity="1" />
+    <End Type="LocalizedDatabaseModel.TransactionDetail" Role="TransactionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionDetail">
+        <PropertyRef Name="transactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_transaction_user">
+    <End Type="LocalizedDatabaseModel.User" Role="User" Multiplicity="1" />
+    <End Type="LocalizedDatabaseModel.Transaction" Role="Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="Address1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="LocalizedDatabaseModel.FK_address_user" FromRole="Address" ToRole="User" />
+    <NavigationProperty Name="TransactionDetails" Relationship="LocalizedDatabaseModel.FK_transaction_address" FromRole="Address" ToRole="TransactionDetail" />
+    <Property Name="AddressName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_address_user">
+    <End Type="LocalizedDatabaseModel.User" Role="User" Multiplicity="1" />
+    <End Type="LocalizedDatabaseModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_transaction_address">
+    <End Type="LocalizedDatabaseModel.Address" Role="Address" Multiplicity="0..1" />
+    <End Type="LocalizedDatabaseModel.TransactionDetail" Role="TransactionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionDetail">
+        <PropertyRef Name="addressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,50 @@
+﻿.add-address {
+    margin-top: 50px;
+    padding: 0 6%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction: column;
+}
+
+.text-input, .text-area {
+    border-radius: 8px;
+    border: 1px solid gray;
+    padding: 16px;
+    margin-top: 8px;
+    font-size: 16px;
+}
+
+.text-area {
+    height: 200px;
+}
+
+.btn-submit {
+    margin-top: 8px;
+    border: none;
+    outline: none;
+    background-color: #88304E;
+    padding: 8px;
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    color: #88304E;
+    border: none;
+    outline: none;
+    background-color: white;
+    border: 1px solid #88304E;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}

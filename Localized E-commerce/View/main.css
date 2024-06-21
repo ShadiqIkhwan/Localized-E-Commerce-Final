@@ -1,0 +1,142 @@
+﻿body {
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 0 4%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    z-index: 99;
+}
+
+.navbar-section {
+    max-width: 1280px;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.navbar .navbar-section .logo {
+    font-size: 36px;
+    color: #E23E57;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 8px;
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+    flex: 1;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    max-width: 40%;
+    width: 100%
+}
+
+    .search input {
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 20px;
+    }
+
+        .search input::placeholder {
+            color: #828282;
+            font-size: 20px;
+        }
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    width: max-content;
+}
+
+.profile {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.user .menu {
+    border-radius: 8px;
+    padding: 8px;
+    right: 20px;
+    position: absolute;
+    top: 120%;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.user .menu.active {
+    display: block;
+}
+
+.user .menu .menuItem {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: black
+}
+
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 99px !important;
+    /*padding: 0 6%;*/
+}
+
+footer {
+    margin-top: 50px;
+    padding: 0 6%;
+    margin-bottom: 50px;
+}
+
+    footer .container {
+        margin-top: 100px !important;
+        display: flex;
+        gap: 100px;
+    }
+
+    footer .container .column {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+        footer .container .column .title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        footer .container .column .footer-item {
+            font-size: 18px;
+            text-decoration: none;
+            color: black;
+        }
+
+        footer .container .column .sosial-media {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            footer .container .column .sosial-media a {
+                padding: 8px;
+            }

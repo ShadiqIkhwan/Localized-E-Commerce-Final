@@ -1,0 +1,23 @@
+﻿.about{
+    margin-top: 50px;
+    padding: 0 6%;
+}
+
+.about-title{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.about-container{
+    margin-top: 20px;
+    font-size: 16px
+}
+
+.vission, .branding, .supporting {
+    margin-top: 20px;
+}
+
+.vission .title, .branding .title, .supporting .title{
+    font-size: 18px;
+    font-weight: bold;
+}
